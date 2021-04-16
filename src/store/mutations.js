@@ -3,12 +3,12 @@ export default {
     state.activeType = type
   },
 
-  SET_LIST: (state, { type, ids }) => {
-    state.lists[type] = ids
+  SET_LIST: (state, { type, data }) => {
+    state.lists[type] = data
   },
 
-  SET_ITEMS: (state, { items }) => {
-    items.forEach(item => {
+  SET_ITEMS: (state, { data }) => {
+    data.forEach(item => {
       if (item) {
         state.items[item.id] = item;
       }
