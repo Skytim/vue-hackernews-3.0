@@ -11,38 +11,55 @@
       >
       <a v-else class="disabled">more &gt;</a>
     </div>
-    <transition :name="transition">
-      <div class="news-list" :key="displayedPage" v-if="displayedPage > 0">
-        <transition-group tag="ul" name="item">
-          <item v-for="item in displayedItems" :key="item.id" :item="item">
-          </item>
-        </transition-group>
+    <main>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 5%"></th>
+              <th style="width: 95%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <item v-for="item in displayedItems" :key="item.id" :item="item">
+           </item>
+          </tbody>
+        </table>
       </div>
-    </transition>
-    <div  v-for="item in displayedItems" :key="item.id" :item="item">
-      {{item.id}}
-    </div>
+    </main>
   </div>
 </template>
 
 <script>
-import Item from '../components/Item.vue';
+import Item from "../components/Item.vue";
 export default {
   name: "item-list",
   components: {
-    Item
+    Item,
   },
   props: {
     type: String,
   },
-  data () {
+  data() {
     return {
-      transition: 'slide-right',
+      transition: "slide-right",
       displayedPage: Number(this.$route.params.page) || 1,
-      displayedItems: this.$store.getters.activeItems
-    }
+      displayedItems: this.$store.getters.activeItems,
+    };
   },
-  created() {
+  computed: {
+    page() {
+      return Number(this.$route.params.page) || 1;
+    },
+    maxPage() {
+      const { itemsPerPage, lists } = this.$store.state;
+      return Math.ceil(lists[this.type].length / itemsPerPage);
+    },
+    hasMore() {
+      return this.page < this.maxPage;
+    },
+  },
+  mounted() {
     this.loadItems(this.page);
     // // watch the current list for realtime updates
     // this.unwatchList = watchList(this.type, (ids) => {
