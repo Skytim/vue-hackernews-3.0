@@ -12,6 +12,7 @@
           Hacker News</router-link
         >
       </a>
+      
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <router-link class="me-3 py-2 text-dark text-decoration-none" to="/top"
           >Top</router-link
@@ -28,14 +29,7 @@
         <router-link class="me-3 py-2 text-dark text-decoration-none" to="/job"
           >Jobs</router-link
         >
-        <a
-           class="py-2 text-dark text-decoration-none"
-          href="https://github.com/Skytim/vue-hackernews-3.0"
-          target="_blank"
-          rel="noopener"
-        >
-        (Build with Vue 3)
-        </a>
+ 
       </nav>
     </header>
     <router-view />

@@ -8,7 +8,27 @@ import router from './router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
 sync(store, router)
-let app = createApp(App);
+
+
+function getTitle(vm) {
+    const { title } = vm.$options
+    if (title) {
+        return typeof title === 'function'
+            ? title.call(vm)
+            : title
+    }
+}
+
+const myMixin = {
+    mounted() {
+        const title = getTitle(this);
+        if (title) {
+            document.title = `Vue HN 3.0 | ${title}`
+        }
+    },
+}
+
+let app = createApp(App).mixin(myMixin);
 app.config.globalProperties.$filters = {
     host(url) {
         const host = url.replace(/^https?:\/\//, '').replace(/\/.*$/, '')

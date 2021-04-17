@@ -68,6 +68,9 @@ export default {
       });
     },
   },
+  title () {
+    return this.item.title
+  },
 };
 
 // recursively fetch all descendent comments
