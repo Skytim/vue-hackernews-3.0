@@ -56,6 +56,7 @@ export default {
       transition: "slide-right",
       displayedPage: Number(this.$route.params.page) || 1,
       displayedItems: this.$store.getters.activeItems,
+      timer: "",
     };
   },
   computed: {
@@ -70,15 +71,11 @@ export default {
       return this.page < this.maxPage;
     },
   },
-  mounted() {
+  created() {
     this.loadItems(this.page);
-    // // watch the current list for realtime updates
-    // this.unwatchList = watchList(this.type, (ids) => {
-    //   this.$store.commit("SET_LIST", { type: this.type, ids });
-    //   this.$store.dispatch("ENSURE_ACTIVE_ITEMS").then(() => {
-    //     this.displayedItems = this.$store.getters.activeItems;
-    //   });
-    // });
+    this.timer = setInterval(() => {
+      this.loadItems(this.page);
+    }, 10000);
   },
   watch: {
     page(to, from) {
@@ -88,6 +85,7 @@ export default {
   methods: {
     loadItems(to = this.page, from = -1) {
       // this.$bar.start();
+      console.log("Loading");
       this.$store
         .dispatch("FETCH_LIST_DATA", {
           type: this.type,
@@ -103,6 +101,12 @@ export default {
           this.displayedItems = this.$store.getters.activeItems;
           // this.$bar.finish();
         });
+    },
+    cancelAutoUpdate() {
+      clearInterval(this.timer);
+    },
+    beforeDestroy() {
+      this.cancelAutoUpdate();
     },
   },
 };
@@ -136,5 +140,4 @@ export default {
   opacity: 0;
   transform: translate(30px, 0);
 }
-
 </style>
