@@ -11,7 +11,7 @@
           </div>
           <p class="card-text mb-auto">Karma: {{ user.karma }}</p>
           <p>
-            About: 
+            About:
             <span
               class="card-text mb-auto"
               v-if="user.about"
@@ -19,8 +19,16 @@
             ></span>
           </p>
           <span>
-            <a href="#" class="stretched-link">Submissions</a>|
-            <a href="#" class="stretched-link">Comments</a></span
+            <a
+              :href="'https://news.ycombinator.com/submitted?id=' + user.id"
+              class="stretched-link"
+              >Submissions</a
+            >|
+            <a
+              :href="'https://news.ycombinator.com/threads?id=' + user.id"
+              class="stretched-link"
+              >Comments</a
+            ></span
           >
         </div>
       </template>

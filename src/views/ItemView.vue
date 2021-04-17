@@ -20,22 +20,22 @@
       >
         <p class="p-3">
           {{ item.kids ? item.descendants + " comments" : "No comments yet." }}
-          <spinner :show="loading"></spinner>
         </p>
         <comment v-for="id in item.kids" :key="id" :id="id"></comment>
       </div>
     </template>
+    <spinner :show="loading"></spinner>
   </div>
 </template>
 
 <script>
-// import Spinner from "../components/Spinner.vue";
+import Spinner from "../components/Spinner.vue";
 import Comment from "../components/Comment.vue";
 export default {
   name: "item-view",
   components: {
     Comment,
-    // Spinner,
+    Spinner,
   },
   data() {
     return {
