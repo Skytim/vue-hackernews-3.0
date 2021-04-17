@@ -68,8 +68,11 @@ export default {
       });
     },
   },
-  title () {
-    return this.item.title
+  title() {
+    if (this.item) {
+      return this.item.title;
+    }
+    return " ";
   },
 };
 
