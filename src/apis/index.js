@@ -8,6 +8,8 @@ export const fetchIdsByType = (type) => request.get(`${type}stories.json`);
 
 export const fetchItemById = (id) => request.get(`item/${id}.json`);
 
+export const fetchUser = (id) => request.get(`user/${id}.json`);
+
 export const fetchItems = async function (ids) {
     let promiseList = [];
     for (let id of ids) {

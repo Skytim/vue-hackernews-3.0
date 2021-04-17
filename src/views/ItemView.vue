@@ -1,40 +1,36 @@
 <template>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item">
-        <router-link
-          class="page-link"
-          v-if="page > 1"
-          :to="'/' + type + '/' + (page - 1)"
-        >
-          Previous</router-link
-        >
-        <a v-else class="page-link disabled">Previous</a>
-      </li>
-      <li class="page-item">
-        <router-link
-          class="page-link"
-          v-if="hasMore"
-          :to="'/' + type + '/' + (page + 1)"
-          >Next</router-link
-        >
-        <a v-else class="page-link disabled">Next</a>
-      </li>
-      <li class="page-item">
-        <span class="page-link">{{ page }}/{{ maxPage }}</span>
-      </li>
-    </ul>
-  </nav>
-  <main>
-    <div class="table-responsive">
-      <table class="table">
-        <tbody>
-          <item v-for="item in displayedItems" :key="item.id" :item="item">
-          </item>
-        </tbody>
-      </table>
-    </div>
-  </main>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <router-link
+            class="page-link"
+            v-if="page > 1"
+            :to="'/' + type + '/' + (page - 1)"
+            > Previous</router-link
+          >
+          <a v-else class="page-link disabled">Previous</a>
+        </li>
+        <li class="page-item">
+          <router-link  class="page-link" v-if="hasMore" :to="'/' + type + '/' + (page + 1)"
+            >Next</router-link
+          >
+          <a v-else class="page-link disabled">Next</a>
+        </li>
+        <li class="page-item">
+          <span class="page-link">{{ page }}/{{ maxPage }}</span>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <item v-for="item in displayedItems" :key="item.id" :item="item">
+            </item>
+          </tbody>
+        </table>
+      </div>
+    </main>
 </template>
 
 <script>
@@ -76,11 +72,6 @@ export default {
     //   });
     // });
   },
-  watch: {
-    page(to, from) {
-      this.loadItems(to, from);
-    },
-  },
   methods: {
     loadItems(to = this.page, from = -1) {
       // this.$bar.start();
@@ -98,6 +89,7 @@ export default {
           this.displayedPage = to;
           this.displayedItems = this.$store.getters.activeItems;
           // this.$bar.finish();
+          console.log(this.displayedItems);
         });
     },
   },

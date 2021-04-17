@@ -15,7 +15,7 @@ export default {
     })
   },
 
-  SET_USER: (state, { id, user }) => {
-    state.users[id] = user || false; /* false means user not found */
+  SET_USER: (state, { userId, user }) => {
+    state.users[userId] = user.data || {}; /* false means user not found */
   }
 }

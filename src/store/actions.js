@@ -1,6 +1,7 @@
 import {
     fetchIdsByType,
-    fetchItems
+    fetchItems,
+    fetchUser
 } from '../apis/index'
 
 
@@ -49,9 +50,9 @@ export default {
         }
     },
 
-    // FETCH_USER: ({ commit, state }, { id }) => {
-    //     return state.users[id]
-    //         ? Promise.resolve(state.users[id])
-    //         : fetchUser(id).then(user => commit('SET_USER', { id, user }))
-    // }
+    FETCH_USER: ({ commit, state }, { userId }) => {
+        return state.users[userId]
+            ? Promise.resolve(state.users[userId])
+            : fetchUser(userId).then(user => commit('SET_USER', { userId, user }))
+    }
 }
