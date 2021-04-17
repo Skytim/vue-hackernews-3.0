@@ -71,6 +71,9 @@ export default {
       return this.page < this.maxPage;
     },
   },
+  unmounted() {
+    this.cancelAutoUpdate();
+  },
   created() {
     this.loadItems(this.page);
     this.timer = setInterval(() => {
@@ -104,9 +107,6 @@ export default {
     },
     cancelAutoUpdate() {
       clearInterval(this.timer);
-    },
-    beforeDestroy() {
-      this.cancelAutoUpdate();
     },
   },
 };
