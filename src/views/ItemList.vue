@@ -1,5 +1,5 @@
 <template>
-  <nav aria-label="Page navigation example">
+  <nav aria-label="Page navigation example" v-if="!isLoading">
     <ul class="pagination">
       <li class="page-item">
         <router-link
@@ -35,6 +35,7 @@
               </item>
             </transition-group>
           </tbody>
+           <spinner :show="isLoading"></spinner>
         </table>
       </div>
     </transition>
@@ -43,10 +44,12 @@
 
 <script>
 import Item from "../components/Item.vue";
+import Spinner from "../components/Spinner.vue";
 export default {
   name: "item-list",
   components: {
     Item,
+    Spinner,
   },
   props: {
     type: String,
@@ -70,6 +73,9 @@ export default {
     hasMore() {
       return this.page < this.maxPage;
     },
+    isLoading() {
+      return this.displayedItems.length === 0;
+    },
   },
   unmounted() {
     this.cancelAutoUpdate();
@@ -88,7 +94,6 @@ export default {
   methods: {
     loadItems(to = this.page, from = -1) {
       // this.$bar.start();
-      console.log("Loading");
       this.$store
         .dispatch("FETCH_LIST_DATA", {
           type: this.type,
