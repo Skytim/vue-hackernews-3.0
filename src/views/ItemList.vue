@@ -26,14 +26,18 @@
     </ul>
   </nav>
   <main>
-    <div class="table-responsive">
-      <table class="table">
-        <tbody>
-          <item v-for="item in displayedItems" :key="item.id" :item="item">
-          </item>
-        </tbody>
-      </table>
-    </div>
+    <transition :name="transition">
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+            <transition-group name="item">
+              <item v-for="item in displayedItems" :key="item.id" :item="item">
+              </item>
+            </transition-group>
+          </tbody>
+        </table>
+      </div>
+    </transition>
   </main>
 </template>
 
@@ -104,3 +108,33 @@ export default {
 };
 </script>
 
+<style scoped>
+.slide-left-enter,
+.slide-right-leave-to {
+  opacity: 0;
+  transform: translate(30px, 0);
+}
+
+.slide-left-leave-to,
+.slide-right-enter {
+  opacity: 0;
+  transform: translate(-30px, 0);
+}
+.item-move,
+.item-enter-active,
+.item-leave-active {
+  transition: all 0.5s;
+  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.item-enter {
+  opacity: 0;
+  transform: translate(30px, 0);
+}
+
+.item-leave-active {
+  opacity: 0;
+  transform: translate(30px, 0);
+}
+
+</style>
