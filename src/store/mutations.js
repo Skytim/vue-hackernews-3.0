@@ -9,8 +9,8 @@ export default {
 
   SET_ITEMS: (state, { items }) => {
     items.forEach(item => {
-      if (item) {
-        state.items[item.id] = item;
+      if (item.status==='fulfilled') {
+        state.items[item.value.id] = item.value;
       }
     })
   },

@@ -19,5 +19,5 @@ export const fetchItems = async function (ids) {
     for (let id of ids) {
         promiseList.push(fetchItemById(id))
     }
-    return Promise.all(promiseList)
+    return Promise.allSettled(promiseList)
 }
