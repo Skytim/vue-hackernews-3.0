@@ -7,8 +7,8 @@ export default {
     state.lists[type] = data
   },
 
-  SET_ITEMS: (state, { data }) => {
-    data.forEach(item => {
+  SET_ITEMS: (state, { items }) => {
+    items.forEach(item => {
       if (item) {
         state.items[item.id] = item;
       }

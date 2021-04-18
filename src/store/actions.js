@@ -40,10 +40,7 @@ export default {
         })
         if (ids.length) {
             return fetchItems(ids).then(items => {
-                let data = items.map((item)=>{
-                    return item.data
-                });
-                commit('SET_ITEMS', { data })
+                commit('SET_ITEMS', { items })
             })
         } else {
             return Promise.resolve()

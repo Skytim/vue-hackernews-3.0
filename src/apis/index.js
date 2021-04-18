@@ -6,7 +6,11 @@ const request = axios.create({
 
 export const fetchIdsByType = (type) => request.get(`${type}stories.json`);
 
-export const fetchItemById = (id) => request.get(`item/${id}.json`);
+export const fetchItemById = (id) => request.get(`item/${id}.json`).then(res => {
+    let data = res.data;
+    data.__lastUpdated =  new Date();
+    return data;
+});
 
 export const fetchUser = (id) => request.get(`user/${id}.json`);
 
