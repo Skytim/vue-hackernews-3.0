@@ -33,7 +33,7 @@ export default {
             if (!item) {
                 return true
             }
-            if (now - item.__lastUpdated > 1000 * 60 * 3) {
+            if (now - item.__lastUpdated > 1000 * 60 * 0.5) {
                 return true
             }
             return false
