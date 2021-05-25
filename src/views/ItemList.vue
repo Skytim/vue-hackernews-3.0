@@ -1,5 +1,5 @@
 <template>
-  <nav aria-label="Page navigation example" v-if="!isLoading">
+  <nav aria-label="Page navigation example mt-4" v-if="!isLoading">
     <ul class="pagination">
       <li class="page-item">
         <router-link
